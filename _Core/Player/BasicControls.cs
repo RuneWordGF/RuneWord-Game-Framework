@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Metadata/BasicControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/_RWUF/_Core/Player/BasicControls.inputactions'
 
 using System;
 using System.Collections;
