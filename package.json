@@ -1,6 +1,6 @@
 {
   "name": "com.rwgf.core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "displayName": "RuneWord Game Framework",
   "description": "Contains all-purpose scripts used in RuneWord projects.",
   "unity": "2020.3",
