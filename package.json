@@ -6,7 +6,7 @@
   "unity": "2020.3",
   "licensesUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
   "dependencies": {
-    "com.unity.inputsystem": "1.0.2",
+    "com.unity.inputsystem": "1.0.2"
  },
  "keywords": [
     "unity",
