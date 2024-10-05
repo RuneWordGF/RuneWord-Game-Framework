@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SelectedStateMarker : MonoBehaviour
 {
-    public Button InteractableButton;
+    public RWUF_Button InteractableButton;
     public GameObject HighlightSample;
     private GameObject generatedHighlight;
 
+    public bool OnPointerHighlight;
+
     private void Start()
     {
-        InteractableButton = GetComponent<Button>();
+        InteractableButton = GetComponent<RWUF_Button>();
+
+        if (OnPointerHighlight)
+        {
+            InteractableButton.OnPointerEnterEvent.AddListener(() => SetMarkedItem(true));
+            InteractableButton.OnPointerExitEvent.AddListener(() => SetMarkedItem(false));
+        }
     }
 
     public void SetMarkedItem(bool selected)

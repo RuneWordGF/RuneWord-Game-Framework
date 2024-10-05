@@ -1,58 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 using UnityEngine.UI;
 
 public class InputBridge : MonoBehaviour
 {
-    public PlayerInput Controller;
-    private BasicControls ControlMap;
+    private BasicControls _controlMap;
 
-    public Selectable SelectedItem;
+    public UnityEvent OnSchemeChanged = new UnityEvent();
+
+    public UnityEvent<Vector2> OnMoving = new UnityEvent<Vector2>();
+    public UnityEvent OnConfirm = new UnityEvent();
+
+    public UnityEvent<Vector2> OnLooking = new UnityEvent<Vector2>();
 
     private void Start()
     {
-        ControlMap = new BasicControls();
+        _controlMap = new BasicControls();
+        _controlMap.Enable();
 
-        Controller.enabled = true;
-        ControlMap.Enable();
-        ControlMap.Player.Fire.started += (args) => PrintCheck();
-        ControlMap.Player.Move.started += (args) => PrintMove(args);
-        ControlMap.Player.Look.started += (args) => What(args);
+        InputUser.onChange += (args0, args1, device) => SchemeChanged(device);
+
+        _controlMap.Player.Move.started    += (args) => Moving(args);
+        _controlMap.Player.Confirm.started += (args) => ConfirmAction(args);
+        _controlMap.Player.Look.started    += (args) => Looking(args);
     }
 
-    private void PrintCheck()
+    private void SchemeChanged(InputDevice newDevice)
     {
-        // Debug.Log("Fire was shot");
+        OnSchemeChanged?.Invoke();
     }
 
-    private void PrintMove(InputAction.CallbackContext args)
+    private void Moving(InputAction.CallbackContext args)
     {
         Vector2 movementResult = args.ReadValue<Vector2>();
-        bool moveVer = movementResult.y != 0;
-        bool moveHor = movementResult.x != 0;
-        bool moveUp = movementResult.y > 0;
-        bool moveRight = movementResult.x > 0;
 
-        SetSelectableState(SelectedItem, false);
-        SelectedItem = HandleNavigation.ReturnSelectable(SelectedItem, movementResult);
-        SetSelectableState(SelectedItem, true);
-
-        // Debug.Log(movementResult.x);
-        // Debug.Log(movementResult.y);
+        OnMoving?.Invoke(movementResult);
     }
 
-    private void SetSelectableState(Selectable target, bool newState)
+    private void ConfirmAction(InputAction.CallbackContext args)
     {
-        SelectedStateMarker marker = target.GetComponent<SelectedStateMarker>();
-        marker.SetMarkedItem(newState);
-    } 
+        OnConfirm?.Invoke();
+    }
 
-    private void What(InputAction.CallbackContext args)
+    private void Looking(InputAction.CallbackContext args)
     {
         Vector2 movementResult = args.ReadValue<Vector2>();
-        // Debug.Log(movementResult.x + " | " + movementResult.y);
-        // Debug.Log(movementResult.y);
+
+        OnLooking?.Invoke(movementResult);
     }
 }
