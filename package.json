@@ -1,0 +1,17 @@
+{
+  "name": "com.rwgf.core",
+  "version": "0.0.1",
+  "displayName": "RuneWord Game Framework",
+  "description": "Contains all-purpose scripts used in RuneWord projects.",
+  "unity": "2020.3",
+  "licensesUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+ "keywords": [
+    "unity",
+    "core"
+  ],
+  "author": {
+    "name": "RuneWorldGF",
+    "email": "RuneWorldGF@example.com",
+    "url": "https://github.com/RuneWordGF"
+  }
+}
