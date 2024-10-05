@@ -26,6 +26,12 @@ public static class HandleGraphics
         return newTexture;
     }
 
+    public static byte[] CreatePNG(RenderTexture input, Camera targetCamera = null)
+    {
+        Texture2D processedTexture = CreateTexture2D(input, targetCamera);
+        return processedTexture.EncodeToPNG();
+    }
+
     public static Sprite CreateSprite(RenderTexture input, Camera targetCamera = null)
     {
         Texture2D processedTexture = CreateTexture2D(input, targetCamera);
