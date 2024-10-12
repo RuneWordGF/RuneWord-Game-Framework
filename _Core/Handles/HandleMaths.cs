@@ -27,4 +27,17 @@ public static class HandleMaths
     {
         return input.ToString().Length;
     }
+
+    public static int NonZeroInSet(int[] inputSet)
+    {
+        int nonZeroCount = 0;
+        foreach(int entry in inputSet)
+        {
+            if (entry > 0)
+            {
+                nonZeroCount++;
+            }
+        }
+        return nonZeroCount;
+    }
 }
